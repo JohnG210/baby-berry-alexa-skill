@@ -1,0 +1,4 @@
+-r requirements.txt
+python-lambda-local
+pytest
+pytest-mock

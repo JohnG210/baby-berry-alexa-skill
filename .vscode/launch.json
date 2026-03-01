@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Pytest: all tests",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": ["-v"],
+            "cwd": "${workspaceFolder}/skill",
+            "envFile": "${workspaceFolder}/.env",
+            "python": "${workspaceFolder}/skill/.venv/bin/python"
+        },
+        {
+            "name": "Pytest: current file",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": ["${file}", "-v"],
+            "cwd": "${workspaceFolder}/skill",
+            "envFile": "${workspaceFolder}/.env",
+            "python": "${workspaceFolder}/skill/.venv/bin/python"
+        }
+    ]
+}

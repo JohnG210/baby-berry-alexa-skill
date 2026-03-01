@@ -1,0 +1,7 @@
+.venv/
+skill/package/
+skill/deployment.zip
+__pycache__/
+*.pyc
+.python-version
+.env
