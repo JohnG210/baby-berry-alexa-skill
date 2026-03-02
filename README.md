@@ -16,7 +16,7 @@ An Alexa skill for logging baby tracking events to [Huckleberry](https://huckleb
 
 ### 1. Clone & set up the environment
 ```bash
-git clone https://github.com/YOUR_USERNAME/baby-berry.git
+git clone https://github.com/JohnG210/baby-berry.git
 cd baby-berry
 ./setup_venv.sh
 ```
