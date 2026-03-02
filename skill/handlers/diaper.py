@@ -7,11 +7,10 @@ Slots:
   consistency   – custom: solid | loose | runny | mucousy | hard | pebbles | diarrhea  (optional)
   diaper_rash   – custom: rash | no rash                             (optional)
 
-Mapping:
-  pee / wet          → mode="pee",  pee=True,  poo=False
-  poo / poop / dirty → mode="poo",  pee=False, poo=True
-  both               → mode="both", pee=True,  poo=True
-  dry                → mode="dry",  pee=False, poo=False
+API call: log_diaper(child_uid, mode, pee_amount=None, poo_amount=None,
+                     color=None, consistency=None, diaper_rash=False)
+  mode alone distinguishes pee/poo/both/dry — no separate pee/poo booleans.
+  pee_amount / poo_amount ('little'|'medium'|'big') are not exposed via voice.
 """
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
 from ask_sdk_core.utils import is_intent_name
@@ -20,13 +19,13 @@ from huckleberry_client import get_client
 from handlers.common import get_slot_value
 
 _DIAPER_MAP = {
-    "pee":   ("pee",  True,  False),
-    "wet":   ("pee",  True,  False),
-    "poo":   ("poo",  False, True),
-    "poop":  ("poo",  False, True),
-    "dirty": ("poo",  False, True),
-    "both":  ("both", True,  True),
-    "dry":   ("dry",  False, False),
+    "pee":   "pee",
+    "wet":   "pee",
+    "poo":   "poo",
+    "poop":  "poo",
+    "dirty": "poo",
+    "both":  "both",
+    "dry":   "dry",
 }
 
 
@@ -42,13 +41,12 @@ class LogDiaperIntentHandler(AbstractRequestHandler):
         consistency = get_slot_value(handler_input, "consistency")
         diaper_rash_raw = get_slot_value(handler_input, "diaper_rash")
 
-        if diaper_type_raw not in _DIAPER_MAP:
+        mode = _DIAPER_MAP.get(diaper_type_raw)
+        if not mode:
             speech = "I didn't catch the diaper type. Please say pee, poo, both, or dry."
             return handler_input.response_builder.speak(speech).response
 
-        mode, pee, poo = _DIAPER_MAP[diaper_type_raw]
-
-        kwargs = {"mode": mode, "pee": pee, "poo": poo}
+        kwargs = {"mode": mode}
         if color:
             kwargs["color"] = color
         if consistency:

@@ -1,4 +1,5 @@
 """Tests for handlers/bottle_feeding.py — LogBottleFeedingIntent."""
+import os
 import pytest
 from unittest.mock import call
 
@@ -115,32 +116,34 @@ def test_invalid_amount_returns_error(mock_api):
     mock_api.log_bottle_feeding.assert_not_called()
 
 
-# ── Time slot — start kwarg probe ────────────────────────────────────────────
+# ── Time slot — routes to log_bottle_at_time ─────────────────────────────────
 
-def test_time_slot_passes_start_kwarg_when_supported(mock_api):
-    """When time slot is present and API accepts start=, log with timestamp."""
+def test_time_slot_calls_log_bottle_at_time_not_api(mock_api, mocker):
+    """When time slot is present, log_bottle_at_time() is used instead of the API method."""
+    mock_at_time = mocker.patch("handlers.bottle_feeding.log_bottle_at_time")
     hi = make_intent_input(
         "LogBottleFeedingIntent",
         {"amount": "4", "unit": "oz", "time": "14:30"},
     )
     HANDLER.handle(hi)
-    _, kwargs = mock_api.log_bottle_feeding.call_args
-    assert "start" in kwargs
-    assert isinstance(kwargs["start"], int)
+    mock_at_time.assert_called_once()
+    mock_api.log_bottle_feeding.assert_not_called()
 
-def test_time_slot_falls_back_when_start_not_supported(mock_api):
-    """TypeError on start= → retry without it and add spoken caveat."""
-    mock_api.log_bottle_feeding.side_effect = [TypeError("unexpected keyword"), None]
+def test_time_slot_passes_correct_timestamp(mock_api, mocker):
+    """The Unix timestamp passed to log_bottle_at_time reflects the requested time."""
+    import datetime, pytz
+    mock_at_time = mocker.patch("handlers.bottle_feeding.log_bottle_at_time")
     hi = make_intent_input(
         "LogBottleFeedingIntent",
-        {"amount": "4", "unit": "oz", "time": "14:30"},
+        {"amount": "60", "unit": "ml", "time": "19:07"},
     )
-    resp = HANDLER.handle(hi)
-    # Called twice: once with start=, once without
-    assert mock_api.log_bottle_feeding.call_count == 2
-    second_call_kwargs = mock_api.log_bottle_feeding.call_args_list[1][1]
-    assert "start" not in second_call_kwargs
-    assert "current time" in speech(resp).lower()
+    HANDLER.handle(hi)
+    _, kwargs = mock_at_time.call_args
+    ts = kwargs.get("start_timestamp") or mock_at_time.call_args[0][5]
+    tz = pytz.timezone(os.environ.get("HUCKLEBERRY_TIMEZONE", "UTC"))
+    dt = datetime.datetime.fromtimestamp(ts, tz=tz)
+    assert dt.hour == 19
+    assert dt.minute == 7
 
 def test_no_time_slot_calls_api_once_without_start(mock_api):
     hi = make_intent_input("LogBottleFeedingIntent", {"amount": "4", "unit": "oz"})

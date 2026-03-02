@@ -22,25 +22,23 @@ def test_cannot_handle_other():
     assert HANDLER.can_handle(make_intent_input("StartSleepIntent")) is False
 
 
-# ── Diaper-type mapping ───────────────────────────────────────────────────────
+# ── Diaper-type → mode mapping ────────────────────────────────────────────────
 
-@pytest.mark.parametrize("spoken,expected_mode,expected_pee,expected_poo", [
-    ("pee",   "pee",  True,  False),
-    ("wet",   "pee",  True,  False),
-    ("poo",   "poo",  False, True),
-    ("poop",  "poo",  False, True),
-    ("dirty", "poo",  False, True),
-    ("both",  "both", True,  True),
-    ("dry",   "dry",  False, False),
+@pytest.mark.parametrize("spoken,expected_mode", [
+    ("pee",   "pee"),
+    ("wet",   "pee"),
+    ("poo",   "poo"),
+    ("poop",  "poo"),
+    ("dirty", "poo"),
+    ("both",  "both"),
+    ("dry",   "dry"),
 ])
-def test_diaper_type_mapping(mock_api, spoken, expected_mode, expected_pee, expected_poo):
+def test_diaper_type_mode_mapping(mock_api, spoken, expected_mode):
     hi = make_intent_input("LogDiaperIntent", {"diaper_type": spoken})
     HANDLER.handle(hi)
     mock_api.log_diaper.assert_called_once()
     _, kwargs = mock_api.log_diaper.call_args
     assert kwargs["mode"] == expected_mode
-    assert kwargs["pee"] is expected_pee
-    assert kwargs["poo"] is expected_poo
 
 
 # ── Optional slots ────────────────────────────────────────────────────────────
@@ -97,7 +95,7 @@ def test_diaper_rash_absent_when_not_provided(mock_api):
     assert "diaper_rash" not in kwargs
 
 
-# ── Unknown type ──────────────────────────────────────────────────────────────
+# ── Unknown / missing type ────────────────────────────────────────────────────
 
 def test_unknown_diaper_type_returns_error(mock_api):
     hi = make_intent_input("LogDiaperIntent", {"diaper_type": "unknown"})

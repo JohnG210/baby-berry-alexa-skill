@@ -18,4 +18,4 @@ set +o allexport
 source skill/.venv/bin/activate
 
 cd skill
-lambda-local -l lambda_function.py -h lambda_handler -e "../$EVENT"
+python invoke.py "../$EVENT"

@@ -9,7 +9,7 @@ Or from the repo root:
 """
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest.mock import MagicMock
 
 import pytest
@@ -68,7 +68,7 @@ def make_intent_input(intent_name, slots=None):
     return _handler_input(
         IntentRequest(
             request_id="req-test",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(timezone.utc),
             intent=Intent(name=intent_name, slots=slot_map),
         )
     )
@@ -76,13 +76,13 @@ def make_intent_input(intent_name, slots=None):
 
 def make_launch_input():
     return _handler_input(
-        LaunchRequest(request_id="req-test", timestamp=datetime.utcnow())
+        LaunchRequest(request_id="req-test", timestamp=datetime.now(timezone.utc))
     )
 
 
 def make_session_ended_input():
     return _handler_input(
-        SessionEndedRequest(request_id="req-test", timestamp=datetime.utcnow())
+        SessionEndedRequest(request_id="req-test", timestamp=datetime.now(timezone.utc))
     )
 
 

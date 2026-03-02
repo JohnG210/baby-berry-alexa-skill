@@ -1,0 +1,404 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "baby berry",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+
+        {
+          "name": "LogBottleFeedingIntent",
+          "slots": [
+            { "name": "amount",    "type": "AMAZON.NUMBER" },
+            { "name": "unit",      "type": "UnitType" },
+            { "name": "feed_type", "type": "FeedType" },
+            { "name": "time",      "type": "AMAZON.TIME" }
+          ],
+          "samples": [
+            "log {amount} {unit} bottle",
+            "log {amount} {unit} {feed_type} bottle",
+            "log {amount} {unit} bottle at {time}",
+            "log {amount} {unit} {feed_type} bottle at {time}",
+            "log a bottle of {amount} {unit}",
+            "log {amount} {unit} of {feed_type}",
+            "log {amount} {unit} of {feed_type} at {time}",
+            "bottle {amount} {unit}",
+            "bottle feeding {amount} {unit}",
+            "log a bottle",
+            "record {amount} {unit} bottle",
+            "track {amount} {unit} bottle"
+          ]
+        },
+
+        {
+          "name": "StartFeedingIntent",
+          "slots": [
+            { "name": "side", "type": "SideType" }
+          ],
+          "samples": [
+            "start nursing",
+            "start feeding",
+            "start breastfeeding",
+            "begin nursing",
+            "begin feeding",
+            "start {side} side",
+            "start nursing on the {side}",
+            "begin nursing on the {side}",
+            "nursing on the {side} side",
+            "start nursing on {side}",
+            "feed on the {side} side"
+          ]
+        },
+
+        {
+          "name": "PauseFeedingIntent",
+          "slots": [],
+          "samples": [
+            "pause feeding",
+            "pause nursing",
+            "hold on feeding",
+            "pause breastfeeding"
+          ]
+        },
+
+        {
+          "name": "ResumeFeedingIntent",
+          "slots": [],
+          "samples": [
+            "resume feeding",
+            "resume nursing",
+            "continue feeding",
+            "continue nursing",
+            "resume breastfeeding"
+          ]
+        },
+
+        {
+          "name": "SwitchFeedingSideIntent",
+          "slots": [],
+          "samples": [
+            "switch side",
+            "switch feeding side",
+            "other side",
+            "switch breast",
+            "change side",
+            "switch to the other side"
+          ]
+        },
+
+        {
+          "name": "CompleteFeedingIntent",
+          "slots": [],
+          "samples": [
+            "done nursing",
+            "stop feeding",
+            "end nursing",
+            "done feeding",
+            "finish nursing",
+            "finish feeding",
+            "stop nursing",
+            "end feeding",
+            "nursing is done",
+            "feeding is done"
+          ]
+        },
+
+        {
+          "name": "CancelFeedingIntent",
+          "slots": [],
+          "samples": [
+            "cancel feeding",
+            "cancel nursing",
+            "delete feeding",
+            "discard feeding",
+            "cancel breastfeeding"
+          ]
+        },
+
+        {
+          "name": "StartSleepIntent",
+          "slots": [],
+          "samples": [
+            "baby is sleeping",
+            "start sleep",
+            "log sleep",
+            "put baby down",
+            "baby went to sleep",
+            "baby fell asleep",
+            "baby is asleep",
+            "start a sleep",
+            "begin sleep",
+            "track sleep"
+          ]
+        },
+
+        {
+          "name": "PauseSleepIntent",
+          "slots": [],
+          "samples": [
+            "pause sleep",
+            "hold sleep"
+          ]
+        },
+
+        {
+          "name": "ResumeSleepIntent",
+          "slots": [],
+          "samples": [
+            "resume sleep",
+            "continue sleep",
+            "baby is sleeping again"
+          ]
+        },
+
+        {
+          "name": "CompleteSleepIntent",
+          "slots": [],
+          "samples": [
+            "baby woke up",
+            "stop sleep",
+            "end sleep",
+            "wake up",
+            "baby is awake",
+            "finish sleep",
+            "sleep is over",
+            "end the sleep"
+          ]
+        },
+
+        {
+          "name": "CancelSleepIntent",
+          "slots": [],
+          "samples": [
+            "cancel sleep",
+            "delete sleep",
+            "discard sleep"
+          ]
+        },
+
+        {
+          "name": "LogDiaperIntent",
+          "slots": [
+            { "name": "diaper_type",  "type": "DiaperType" },
+            { "name": "color",        "type": "PooColor" },
+            { "name": "consistency",  "type": "PooConsistency" },
+            { "name": "diaper_rash",  "type": "DiaperRashType" }
+          ],
+          "samples": [
+            "log a {diaper_type} diaper",
+            "log a {color} {diaper_type} diaper",
+            "diaper change {diaper_type}",
+            "diaper change {diaper_type}",
+            "log a {diaper_type} diaper with a rash",
+            "log a {diaper_type} diaper with {diaper_rash}",
+            "log a {color} {diaper_type} diaper with a rash",
+            "log a {diaper_type} diaper that is {consistency}",
+            "log a {color} {diaper_type} diaper that is {consistency}",
+            "log diaper {diaper_type}",
+            "record a {diaper_type} diaper",
+            "track a {diaper_type} diaper",
+            "dirty diaper",
+            "diaper change"
+          ]
+        },
+
+        {
+          "name": "LogGrowthIntent",
+          "slots": [
+            { "name": "weight",      "type": "AMAZON.NUMBER" },
+            { "name": "height",      "type": "AMAZON.NUMBER" },
+            { "name": "head",        "type": "AMAZON.NUMBER" },
+            { "name": "unit_system", "type": "UnitSystem" }
+          ],
+          "samples": [
+            "log weight {weight} pounds",
+            "log weight {weight} kilograms",
+            "log weight {weight} kilos",
+            "log weight {weight}",
+            "log height {height} inches",
+            "log height {height} centimeters",
+            "log height {height}",
+            "log head circumference {head}",
+            "log head {head} inches",
+            "log head {head} centimeters",
+            "log head {head}",
+            "log growth weight {weight} height {height}",
+            "log weight {weight} in {unit_system}",
+            "log height {height} in {unit_system}",
+            "log growth in {unit_system}",
+            "record weight {weight} pounds",
+            "track weight {weight} pounds",
+            "log growth"
+          ]
+        }
+      ],
+
+      "types": [
+        {
+          "name": "UnitType",
+          "values": [
+            {
+              "name": {
+                "value": "oz",
+                "synonyms": ["ounce", "ounces", "fluid ounce", "fluid ounces"]
+              }
+            },
+            {
+              "name": {
+                "value": "ml",
+                "synonyms": ["milliliter", "milliliters", "millilitre", "millilitres", "c c", "cc"]
+              }
+            }
+          ]
+        },
+
+        {
+          "name": "FeedType",
+          "values": [
+            {
+              "name": {
+                "value": "formula",
+                "synonyms": ["formula milk", "baby formula", "formula feed"]
+              }
+            },
+            {
+              "name": {
+                "value": "breast milk",
+                "synonyms": ["breastmilk", "pumped milk", "pumped", "expressed milk", "breast"]
+              }
+            },
+            {
+              "name": {
+                "value": "mixed",
+                "synonyms": ["combination", "combo", "mix"]
+              }
+            }
+          ]
+        },
+
+        {
+          "name": "SideType",
+          "values": [
+            {
+              "name": {
+                "value": "left",
+                "synonyms": ["left side", "left breast", "lefty"]
+              }
+            },
+            {
+              "name": {
+                "value": "right",
+                "synonyms": ["right side", "right breast", "righty"]
+              }
+            }
+          ]
+        },
+
+        {
+          "name": "DiaperType",
+          "values": [
+            {
+              "name": {
+                "value": "pee",
+                "synonyms": ["wet", "number one", "urine", "peed"]
+              }
+            },
+            {
+              "name": {
+                "value": "poo",
+                "synonyms": ["poop", "dirty", "number two", "bm", "bowel movement", "soiled", "poopy"]
+              }
+            },
+            {
+              "name": {
+                "value": "both",
+                "synonyms": ["pee and poo", "poo and pee", "wet and dirty", "everything", "mixed diaper"]
+              }
+            },
+            {
+              "name": {
+                "value": "dry",
+                "synonyms": ["clean", "empty", "nothing", "unchanged"]
+              }
+            }
+          ]
+        },
+
+        {
+          "name": "PooColor",
+          "values": [
+            { "name": { "value": "yellow",  "synonyms": ["golden", "mustard"] } },
+            { "name": { "value": "green",   "synonyms": ["greenish", "olive"] } },
+            { "name": { "value": "brown",   "synonyms": ["brownish", "tan"] } },
+            { "name": { "value": "black",   "synonyms": ["dark", "meconium"] } },
+            { "name": { "value": "red",     "synonyms": ["reddish", "bloody"] } },
+            { "name": { "value": "gray",    "synonyms": ["grey", "grayish"] } }
+          ]
+        },
+
+        {
+          "name": "PooConsistency",
+          "values": [
+            { "name": { "value": "solid",    "synonyms": ["firm", "formed"] } },
+            { "name": { "value": "loose",    "synonyms": ["soft", "mushy"] } },
+            { "name": { "value": "runny",    "synonyms": ["liquid", "watery", "wet"] } },
+            { "name": { "value": "mucousy",  "synonyms": ["slimy", "mucus", "mucous"] } },
+            { "name": { "value": "hard",     "synonyms": ["constipated", "dry stool"] } },
+            { "name": { "value": "pebbles",  "synonyms": ["pellets", "small pieces"] } },
+            { "name": { "value": "diarrhea", "synonyms": ["explosive", "very runny", "very watery"] } }
+          ]
+        },
+
+        {
+          "name": "DiaperRashType",
+          "values": [
+            {
+              "name": {
+                "value": "rash",
+                "synonyms": ["has a rash", "with rash", "diaper rash", "red bottom", "red bum"]
+              }
+            },
+            {
+              "name": {
+                "value": "no rash",
+                "synonyms": ["without rash", "without a rash", "no diaper rash", "clear"]
+              }
+            }
+          ]
+        },
+
+        {
+          "name": "UnitSystem",
+          "values": [
+            {
+              "name": {
+                "value": "imperial",
+                "synonyms": ["english", "standard", "american", "US"]
+              }
+            },
+            {
+              "name": {
+                "value": "metric",
+                "synonyms": ["metric system", "SI"]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
