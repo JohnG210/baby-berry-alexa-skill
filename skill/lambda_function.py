@@ -33,6 +33,12 @@ from handlers.sleep import (
     ResumeSleepIntentHandler,
     StartSleepIntentHandler,
 )
+from handlers.status import (
+    LastDiaperStatusIntentHandler,
+    LastFeedingStatusIntentHandler,
+    LastSleepStatusIntentHandler,
+    StatusSummaryIntentHandler,
+)
 
 logging.basicConfig(level=logging.INFO)
 
@@ -65,6 +71,12 @@ sb.add_request_handler(CancelSleepIntentHandler())
 # Diaper & growth
 sb.add_request_handler(LogDiaperIntentHandler())
 sb.add_request_handler(LogGrowthIntentHandler())
+
+# Status queries
+sb.add_request_handler(LastFeedingStatusIntentHandler())
+sb.add_request_handler(LastDiaperStatusIntentHandler())
+sb.add_request_handler(LastSleepStatusIntentHandler())
+sb.add_request_handler(StatusSummaryIntentHandler())
 
 # Exception handler must be last
 sb.add_exception_handler(CatchAllExceptionHandler())

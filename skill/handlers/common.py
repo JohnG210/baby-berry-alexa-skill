@@ -66,7 +66,9 @@ HELP_TEXT = (
     "switch side, stop feeding, cancel feeding. "
     "For sleep: baby is sleeping, pause sleep, resume sleep, baby woke up, cancel sleep. "
     "For diapers: log a pee diaper, log a dirty diaper, log a poo diaper with a rash. "
-    "For growth: log weight 10 pounds, log height 22 inches, log head circumference 15."
+    "For growth: log weight 10 pounds, log height 22 inches, log head circumference 15. "
+    "For status: when was the last feeding, how long since last diaper, "
+    "how long since last sleep, or give me a status update for all three."
 )
 
 

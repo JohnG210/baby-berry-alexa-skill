@@ -217,6 +217,74 @@
         },
 
         {
+          "name": "LastFeedingStatusIntent",
+          "slots": [],
+          "samples": [
+            "when was the last feeding",
+            "how long since last feeding",
+            "how long since she last ate",
+            "when did she last eat",
+            "last feeding",
+            "how long ago was the last feeding",
+            "time since last feeding",
+            "when was her last feeding",
+            "when did she eat last"
+          ]
+        },
+
+        {
+          "name": "LastDiaperStatusIntent",
+          "slots": [],
+          "samples": [
+            "when was the last diaper change",
+            "how long since last diaper",
+            "how long since her last diaper change",
+            "last diaper change",
+            "when was her last diaper change",
+            "how long ago was the last diaper",
+            "time since last diaper change",
+            "when was the last diaper",
+            "how long since the last diaper"
+          ]
+        },
+
+        {
+          "name": "LastSleepStatusIntent",
+          "slots": [],
+          "samples": [
+            "when did she last sleep",
+            "how long since last sleep",
+            "how long has she been awake",
+            "last sleep",
+            "when was her last nap",
+            "when did she wake up",
+            "how long ago did she wake up",
+            "time since last sleep",
+            "how long since she slept",
+            "when was the last sleep"
+          ]
+        },
+
+        {
+          "name": "StatusSummaryIntent",
+          "slots": [],
+          "samples": [
+            "status update",
+            "give me a status update",
+            "how is the baby doing",
+            "how's the baby",
+            "what's the status",
+            "full status",
+            "give me a summary",
+            "baby status",
+            "how is she doing",
+            "what's going on",
+            "catch me up",
+            "summary"
+          ]
+        },
+
+        {
           "name": "LogGrowthIntent",
           "slots": [
             { "name": "weight",      "type": "AMAZON.NUMBER" },
